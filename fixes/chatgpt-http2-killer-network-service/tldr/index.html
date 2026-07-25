@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TL;DR: ChatGPT ERR_HTTP2_PROTOCOL_ERROR Fix | John&rsquo;s Tech Notes</title>
+  <meta name="description" content="The short version of the Killer Network Service fix for ChatGPT freezes and ERR_HTTP2_PROTOCOL_ERROR on Windows.">
+  <meta name="author" content="John">
+  <meta name="theme-color" content="#0c0c11">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://john-thebaptist.github.io/fixes/chatgpt-http2-killer-network-service/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/carme-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/cantata-one-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="alternate" type="application/rss+xml" title="John&rsquo;s Tech Notes" href="/feed.xml">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="/">
+        <span>John The Baptist</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/articles/" aria-current="page">Articles</a>
+        <a href="/builds/">Builds</a>
+        <a href="/about/">About</a>
+        <a href="https://github.com/John-thebaptist" rel="me noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="shell article-layout article-layout--single">
+    <article>
+      <a class="back-link" href="/fixes/chatgpt-http2-killer-network-service/"><span aria-hidden="true">&larr;</span> Read the full investigation</a>
+
+      <header class="article-header">
+        <p class="label">TL;DR &middot; Windows &middot; Networking</p>
+        <h1 class="title-code">ChatGPT and the <span class="title-code__token">ERR_HTTP2_PROTOCOL_ERROR</span> drama, fixed.</h1>
+        <p class="article-deck">ChatGPT web, Firefox, the Windows app and Codex kept freezing with <code>ERR_HTTP2_PROTOCOL_ERROR</code>. The fix was disabling one Killer networking service.</p>
+        <ul class="article-meta">
+          <li><time datetime="2026-07-25">25 July 2026</time></li>
+          <li>Short version</li>
+        </ul>
+        <div class="article-actions">
+          <a class="button" href="/fixes/chatgpt-http2-killer-network-service/">Read the full evidence <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </header>
+
+      <div class="article-body">
+        <h2>The short version</h2>
+        <p>If ChatGPT works on your phone but fails on your Windows PC, and you have Intel Killer networking software installed, check:</p>
+        <pre class="output"><code>Killer Network Service</code></pre>
+        <p>On my machine, stopping this service restored normal HTTP/2 immediately.</p>
+
+        <h2>The fix</h2>
+        <p>Open PowerShell as Administrator:</p>
+        <div class="terminal">
+          <div class="terminal__bar">
+            <span class="terminal__dot" aria-hidden="true"></span><span class="terminal__dot" aria-hidden="true"></span><span class="terminal__dot" aria-hidden="true"></span>
+            <span class="terminal__label">PowerShell</span>
+          </div>
+          <pre><code>Stop-Service -Name 'Killer Network Service' -Force
+Set-Service -Name 'Killer Network Service' -StartupType Disabled</code></pre>
+        </div>
+        <p>Restart Windows and test ChatGPT normally.</p>
+
+        <h2>The symptoms</h2>
+        <ul>
+          <li>ChatGPT took 5-6 minutes to reply or failed completely.</li>
+          <li>The desktop app and Codex were affected.</li>
+          <li>Edge and Firefox both failed.</li>
+          <li>The phone app worked.</li>
+          <li>The error was often <code>net::ERR_HTTP2_PROTOCOL_ERROR</code>.</li>
+        </ul>
+
+        <h2>How I found it</h2>
+        <p>I tested browsers, accounts, internet connections, extensions, DNS and the Windows app. Nothing fixed it.</p>
+        <p>The first breakthrough was forcing HTTP/1.1. ChatGPT immediately worked when HTTP/2 was disabled:</p>
+        <pre class="output"><code>--disable-http2 --disable-quic</code></pre>
+        <p>That meant something on the computer was breaking HTTP/2 traffic.</p>
+
+        <h2>The investigation</h2>
+        <p>The laptop had:</p>
+        <pre class="output"><code>Killer Wi-Fi 6E AX1675i
+Killer E3100G Ethernet Controller</code></pre>
+        <p>I checked the Killer services:</p>
+        <pre class="output"><code>KAPSService
+Killer Analytics Service
+Killer Network Service
+KNDBWM</code></pre>
+        <p>Stopping all Killer services restored HTTP/2. Then I restarted them one by one.</p>
+        <p>The failure returned when this service started:</p>
+        <pre class="output"><code>Killer Network Service</code></pre>
+
+        <h2>Proof</h2>
+        <pre class="output"><code>Killer Network Service running:
+HTTP/2 fails, ChatGPT freezes.
+
+Killer Network Service stopped:
+ChatGPT, Firefox, Edge and Codex work normally.</code></pre>
+
+        <h2>After the fix</h2>
+        <ul>
+          <li>ChatGPT web works normally.</li>
+          <li>Firefox and Edge work with HTTP/2.</li>
+          <li>The ChatGPT Windows app works.</li>
+          <li>Codex works again.</li>
+          <li>No HTTP/2 errors.</li>
+        </ul>
+
+        <h2>Does this apply to you?</h2>
+        <p>Check this if you have:</p>
+        <ul>
+          <li>Killer Ethernet or Wi-Fi hardware.</li>
+          <li>ChatGPT failures only on one PC.</li>
+          <li>Both Edge and Firefox failing.</li>
+          <li>ChatGPT working when HTTP/2 is disabled.</li>
+        </ul>
+        <p>Test first. Do not disable random networking services blindly. Change one thing at a time so you know what actually fixed the problem.</p>
+
+        <h2>Final note</h2>
+        <p>For a month this looked like an OpenAI outage, an account problem, a browser bug or an internet issue.</p>
+        <p>The actual culprit was a local Windows service with the most suspicious name possible:</p>
+        <pre class="output"><code>Killer Network Service</code></pre>
+        <p>Before reinstalling Windows or cancelling your subscription, check what software is sitting between your computer and the internet.</p>
+      </div>
+
+      <footer class="article-footer">
+        <p>This is the condensed version. The <a class="text-link" href="/fixes/chatgpt-http2-killer-network-service/">full investigation</a> has every test, every command and the rollback steps.</p>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <p>Built by John.</p>
+      <p>Powered by GitHub Pages and unreasonable persistence.</p>
+    </div>
+  </footer>
+
+  <script src="/assets/copy.js" defer></script>
+</body>
+</html>

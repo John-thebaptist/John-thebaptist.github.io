@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>John’s Tech Notes</title>
+    <link>https://john-thebaptist.github.io/</link>
+    <atom:link href="https://john-thebaptist.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Real fixes, experiments and builds from a solo developer who documents what actually worked.</description>
+    <language>en</language>
+    <managingEditor>noreply@john-thebaptist.github.io (John)</managingEditor>
+    <webMaster>noreply@john-thebaptist.github.io (John)</webMaster>
+    <copyright>Copyright John</copyright>
+    <generator>Hand-written static HTML</generator>
+    <lastBuildDate>Sat, 25 Jul 2026 12:00:00 +0000</lastBuildDate>
+    <pubDate>Sat, 25 Jul 2026 12:00:00 +0000</pubDate>
+    <item>
+      <title>ChatGPT and the ERR_HTTP2_PROTOCOL_ERROR drama, fixed.</title>
+      <link>https://john-thebaptist.github.io/fixes/chatgpt-http2-killer-network-service/</link>
+      <guid isPermaLink="true">https://john-thebaptist.github.io/fixes/chatgpt-http2-killer-network-service/</guid>
+      <pubDate>Sat, 25 Jul 2026 12:00:00 +0000</pubDate>
+      <category>Fixes</category>
+      <category>Windows</category>
+      <category>Networking</category>
+      <author>noreply@john-thebaptist.github.io (John)</author>
+      <description>A controlled investigation into ERR_HTTP2_PROTOCOL_ERROR, broken HTTP/2 traffic and the Windows service responsible. Thirty days of ChatGPT freezes, failed replies and a broken desktop app, traced through browser, account and network tests to a single Intel Killer service.</description>
+    </item>
+  </channel>
+</rss>

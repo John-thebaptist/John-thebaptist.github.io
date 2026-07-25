@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>John&rsquo;s Tech Notes | Fixes, experiments and builds</title>
+  <meta name="description" content="Real fixes, experiments and builds from a solo developer who documents what actually worked. Written after the problem is solved, with the evidence attached.">
+  <meta name="author" content="John">
+  <meta name="theme-color" content="#0c0c11">
+  <link rel="canonical" href="https://john-thebaptist.github.io/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/carme-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/cantata-one-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="alternate" type="application/rss+xml" title="John&rsquo;s Tech Notes" href="/feed.xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="John&rsquo;s Tech Notes">
+  <meta property="og:title" content="John&rsquo;s Tech Notes">
+  <meta property="og:description" content="Real fixes, experiments and builds from a solo developer who documents what actually worked.">
+  <meta property="og:url" content="https://john-thebaptist.github.io/">
+  <meta property="og:image" content="https://john-thebaptist.github.io/assets/og-cover.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="John&rsquo;s Tech Notes">
+  <meta name="twitter:description" content="Real fixes, experiments and builds from a solo developer who documents what actually worked.">
+  <meta name="twitter:image" content="https://john-thebaptist.github.io/assets/og-cover.png">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="/">
+        <span>John The Baptist</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/articles/">Articles</a>
+        <a href="/builds/">Builds</a>
+        <a href="/about/">About</a>
+        <a href="https://github.com/John-thebaptist" rel="me noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero shell">
+      <img class="hero-logo" src="/assets/JohnLOGO.png" width="1010" height="948" alt="John&rsquo;s Tech Notes">
+      <h1 class="visually-hidden">John&rsquo;s Tech Notes</h1>
+      <p class="hero-lead">Real fixes, experiments and builds from a solo developer who documents what actually worked.</p>
+      <p class="hero-sub">No recycled troubleshooting scripts. No corporate filler. Just the useful part.</p>
+    </section>
+
+    <div class="shell home-sections">
+      <div class="block grid-2">
+        <div>
+          <p class="label block-label">What lives here</p>
+          <a class="card" href="/articles/">
+            <h2>Useful notes, organised by the kind of pain.</h2>
+            <p>News worth tracking, fixes that survived testing, experiments with useful results, and builds documented in public.</p>
+            <span class="card-action">Explore articles <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
+
+        <div>
+          <p class="label block-label">Builds</p>
+          <a class="card" href="/builds/">
+            <h2>Software, tools and experiments built in public.</h2>
+            <p>Case studies, launch notes and breakdowns from rough idea to working product.</p>
+            <span class="pill">Coming soon</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="block">
+        <p class="label block-label">Latest fix</p>
+        <a class="card latest" href="/fixes/chatgpt-http2-killer-network-service/">
+          <h2>ChatGPT vs. ERR_HTTP2_<wbr>PROTOCOL_ERROR</h2>
+          <p>A 30-day investigation into broken HTTP/2 traffic on Windows, the tests that ruled out the obvious suspects, and the service that caused it.</p>
+          <div class="protocol" aria-hidden="true">
+            <div class="protocol-row"><span>:authority</span><span>chatgpt.com</span></div>
+            <div class="protocol-row"><span>:scheme</span><span>https</span></div>
+            <div class="protocol-row"><span>:method</span><span>POST</span></div>
+            <div class="protocol-state"><span>protocol h2</span><b>FAILED</b></div>
+          </div>
+          <span class="card-action">Read the full investigation <span aria-hidden="true">&rarr;</span></span>
+        </a>
+      </div>
+
+      <div class="block">
+        <p class="label block-label">About</p>
+        <article class="card about-card">
+          <h2>Hey there, I&rsquo;m John.</h2>
+          <p>I build automations, websites, scripts and AI tools.</p>
+          <p>During this solo developer journey, I learned that the most useful lessons usually arrive after something breaks in a way the official troubleshooting page calls <strong>impossible</strong>. Spend long enough in the development pit and you learn that <strong>impossible</strong> usually means <strong>not documented yet</strong>.</p>
+          <p>Here I share fixes, experiments and builds worth passing on. The rule is simple: when you find a solution, warn a brother.</p>
+          <div class="about-links">
+            <a class="text-link" href="/feed.xml">RSS feed <span aria-hidden="true">&rarr;</span></a>
+            <a class="text-link" href="https://github.com/John-thebaptist" rel="me noopener">GitHub profile <span aria-hidden="true">&rarr;</span></a>
+            <a class="button" href="/about/">Read more <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <p>Built by John.</p>
+      <p>Powered by GitHub Pages and unreasonable persistence.</p>
+    </div>
+  </footer>
+</body>
+</html>
